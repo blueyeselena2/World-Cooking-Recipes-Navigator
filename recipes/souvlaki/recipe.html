@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Souvlaki</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 10px;
+}
+
+h1 { font-size: 18px; }
+
+.ingredients {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align:center;
+  gap: 6px 15px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+img {
+  width: 100%;
+  max-width: 300px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 14px;
+  margin: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Souvlaki</h1>
+<div class="ingredients">
+
+<label><input type="checkbox"> Eggplants</label>
+<label><input type="checkbox"> Potatoes</label>
+<label><input type="checkbox"> Onions</label>
+<label><input type="checkbox"> Garlic</label>
+
+<label><input type="checkbox"> Olive oil</label>
+<label><input type="checkbox"> Minced beef</label>
+<label><input type="checkbox"> Tomato sauce</label>
+<label><input type="checkbox"> Tomato paste</label>
+
+<label><input type="checkbox"> Salt</label>
+<label><input type="checkbox"> Black pepper</label>
+<label><input type="checkbox"> Cinnamon</label>
+<label><input type="checkbox"> Nutmeg</label>
+
+<label><input type="checkbox"> Bay leaves</label>
+<label><input type="checkbox"> Sugar</label>
+<label><input type="checkbox"> Dry oregano</label>
+<label><input type="checkbox"> Cloves</label>
+
+<label><input type="checkbox"> Red wine</label>
+<label><input type="checkbox"> Butter</label>
+<label><input type="checkbox"> Flour</label>
+<label><input type="checkbox"> Milk</label>
+
+<label><input type="checkbox"> Eggs</label>
+<label><input type="checkbox"> Grated cheese</label>
+<label><input type="checkbox"> Parmesan</label>
+<label><input type="checkbox"> Greek kefalotyri</label>
+
+<label><input type="checkbox"> Breadcrumbs</label>
+<label><input type="checkbox"> Parsley</label>
+<label><input type="checkbox"> Thyme</label>
+<label><input type="checkbox"> Rosemary</label>
+
+<label><input type="checkbox"> Vegetable oil</label>
+<label><input type="checkbox"> Water</label>
+<label><input type="checkbox"> Lemon juice</label>
+<label><input type="checkbox"> Allspice</label>
+
+<label><input type="checkbox"> Paprika</label>
+<label><input type="checkbox"> White pepper</label>
+<label><input type="checkbox"> Cornstarch</label>
+<label><input type="checkbox"> Bechamel sauce</label>
+
+</div>
+
+
+
+<h2 id="step-title"></h2>
+
+<img id="photo" src="">
+<p id="text"></p>
+
+<audio id="audio"></audio>
+
+<div>
+  <button onclick="prev()">⬅ Back</button>
+  <button onclick="play()">🔊 Play</button>
+  <button onclick="next()">Next ➡</button>
+</div>
+
+<script>
+// 🔹 15 PAȘI (exemplu – tu modifici textul + fișierele)
+const steps = [
+  {title:"Step 1",text:"Slice the eggplants.",image:"step1.jpg",audio:"step1.mp3"},
+  {title:"Step 2",text:"Salt the egplans and let rest.",image:"step2.jpg",audio:"step2.mp3"},
+  {title:"Step 3",text:"Fry eggplants lightly.",image:"step3.jpg",audio:"step3.mp3"},
+  {title:"Step 4",text:"Chop onions.",image:"step4.jpg",audio:"step4.mp3"},
+  {title:"Step 5",text:"Sauté onions.",image:"step5.jpg",audio:"step5.mp3"},
+  {title:"Step 6",text:"Add minced meat.",image:"step6.jpg",audio:"step6.mp3"},
+  {title:"Step 7",text:"Add tomato sauce.",image:"step7.jpg",audio:"step7.mp3"},
+  {title:"Step 8",text:"Add spices.",image:"step8.jpg",audio:"step8.mp3"},
+  {title:"Step 9",text:"Simmer meat sauce.",image:"step9.jpg",audio:"step9.mp3"},
+  {title:"Step 10",text:"Prepare béchamel.",image:"step10.jpg",audio:"step10.mp3"},
+  {title:"Step 11",text:"Add eggs to béchamel.",image:"step11.jpg",audio:"step11.mp3"},
+  {title:"Step 12",text:"Layer eggplants and meat.",image:"step12.jpg",audio:"step12.mp3"},
+  {title:"Step 13",text:"Add béchamel layer.",image:"step13.jpg",audio:"step13.mp3"},
+  {title:"Step 14",text:"Bake the moussaka.",image:"step14.jpg",audio:"step14.mp3"},
+  {title:"Step 15",text:"Let rest before serving.",image:"step15.jpg",audio:"step15.mp3"}
+];
+
+let i = 0;
+let wakeLock = null;
+
+async function keepScreenOn() {
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+  } catch (err) {}
+}
+
+function load() {
+  const s = steps[i];
+  document.getElementById("step-title").innerText = s.title;
+  document.getElementById("text").innerText = s.text;
+  document.getElementById("photo").src = s.image;
+
+  const a = document.getElementById("audio");
+  a.src = s.audio;
+  a.load();
+  a.play();
+
+  keepScreenOn();
+}
+
+function play() { document.getElementById("audio").play(); }
+function next() { if (i < steps.length-1) { i++; load(); } }
+function prev() { if (i > 0) { i--; load(); } }
+
+load();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>World Recipe Navigator - Access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="icon.png">
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #800000, #4b0000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:white;
+  text-align:center;
+}
+.box {
+  background:white;
+  color:#800000;
+  padding:40px;
+  border-radius:20px;
+  width:320px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+input {
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+button {
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  background:#800000;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  transition: transform 0.1s ease;
+}
+button:active { transform:scale(0.95); }
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Enter Access Password</h2>
+<input type="password" id="password" placeholder="Enter password">
+<button onclick="checkPassword()">Access App</button>
+</div>
+<script>
+var correctPassword = "GreekChef2026";
+function checkPassword() {
+  var entered = document.getElementById("password").value;
+  if (entered === correctPassword) {
+    window.location.href = "menu.html";
+  } else {
+    alert("Wrong password. Try again!");
+  }
+}
+</script>
+</body>
+</html>
